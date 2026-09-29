@@ -1,0 +1,63 @@
+# 真值表列舉法 SAT 求解器
+
+這是一個使用 Python 實作、以系統性真值表列舉（暴力破解法）來解決布林可滿足性問題（SAT 問題）的簡單教育型專案。
+
+## 專案概述
+
+布林可滿足性問題（Boolean Satisfiability Problem, 簡稱 SAT）是用來判定是否存在一組變數的真值賦值（True 或 False），使得給定的邏輯公式結果為真的問題。本程式會針對 $n$ 個變數產生所有可能的 $2^n$ 種真值組合，並逐一與提供的邏輯子句進行驗證。
+
+## 功能特點
+
+* **純 Python 實作**：僅使用標準函式庫內的 `itertools`，不需要安裝任何額外的外部依賴套件。
+
+* **直覺的 API 設計**：透過字串列表定義變數，並使用 Python 的 lambda 表達式或自訂函數來表示邏輯子句。
+
+* **清晰的執行結果**：若有解會回傳滿足的賦值（SAT），若無解則會標示為不可滿足（UNSAT）。
+
+## 系統需求
+
+* Python 3.x
+
+## 安裝與使用
+
+1. 將 SAT 求解器程式碼儲存為檔案（例如 `sat_solver.py`）。
+
+2. 使用終端機執行該程式：
+
+```bash
+python sat_solver.py
+```
+
+### 範例程式碼
+
+```python
+import itertools
+
+def solve_sat(variables, clauses):
+    n = len(variables)
+    for values in itertools.product([False, True], repeat=n):
+        assignment = dict(zip(variables, values))
+        if all(clause(assignment) for clause in clauses):
+            return True, assignment
+    return False, None
+
+# 範例：求解 (A OR B) AND (NOT A OR C)
+variables = ['A', 'B', 'C']
+clauses = [
+    lambda assign: assign['A'] or assign['B'],
+    lambda assign: (not assign['A']) or assign['C']
+]
+
+satisfiable, solution = solve_sat(variables, clauses)
+print(solution if satisfiable else "UNSAT")
+```
+
+## 限制與注意事項
+
+* **指數級時間複雜度**：時間複雜度為 $O(2^n)$，其中 $n$ 為變數數量。
+
+* **擴充性**：雖然此方法非常適合用於學習與小型邏輯公式，但面對大型的工業級問題時效率會急速下降。若要處理較大問題，建議採用 DPLL 或 CDCL 等高效演算法。
+
+## 授權條款
+
+本專案為開源專案，僅供教育與學習使用。
