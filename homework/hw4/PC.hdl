@@ -1,0 +1,23 @@
+CHIP PC {
+    IN in[16], load, inc, reset;
+    OUT out[16];
+
+    PARTS:
+    // 1. Increment logic: prevOut + 1
+    Inc16(in=prevOut, out=incOut);
+
+    // 2. Mux for inc vs prevOut
+    Mux16(a=prevOut, b=incOut, sel=inc, out=m0);
+
+    // 3. Mux for load vs (inc/prevOut)
+    Mux16(a=m0, b=in, sel=load, out=m1);
+
+    // 4. Mux for reset vs (load/inc/prevOut) -> reset 優先權最高，直接給 0
+    Mux16(a=m1, b=false, sel=reset, out=m2);
+
+    // 5. 透過 Register 與 Load (只要 reset, load, inc 有一個為 1 就要載入)
+    Or(a=reset, b=load, out=or0);
+    Or(a=or0, b=inc, out=regLoad);
+
+    Register(in=m2, load=regLoad, out=prevOut, out=out);
+}
