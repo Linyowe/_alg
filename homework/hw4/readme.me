@@ -1,0 +1,20 @@
+# Iterative Framework & Neural Memory Models (Iterative Learning Project)
+
+本專案實作了數值計算的迭代求解框架，並延伸探討 2024 年諾貝爾物理學獎主題——基於迭代更新機制的 Hopfield 容錯記憶網路與相關數值演算法。
+
+---
+
+## 專案結構
+
+- `iterative3.py`：使用牛頓迭代法（Newton's Method）求解非線性方程式（如 $\sqrt{5}$）的基礎範例。
+- `iter_framework.py`：標準化的物件導向迭代框架，抽象化初始化、單步更新、狀態取得與收斂判斷，方便擴充應用。
+- `iter_nobel_nn.py`：呼應 2024 年諾貝爾物理學獎（Hopfield & Hinton）的 Hopfield 記憶網路實作，透過非同步迭代更新進行帶噪聲記憶的修復與恢復。
+
+---
+
+## 快速開始
+
+確保您的環境已安裝 **Python 3.x** 與 **NumPy**。若尚未安裝 NumPy，可透過以下指令安裝：
+
+```bash
+pip install numpy
