@@ -1,0 +1,18 @@
+# 演算法作業：搜尋法專題（DFS, BFS, 回溯, A*, IC 電路繞線）
+
+本專案收錄演算法課程搜尋法作業的完整實作與深入解析，針對五大經典電腦科學與工程應用問題，分別運用**深度優先搜尋（DFS）**、**廣度優先搜尋（BFS）**、**狀態剪枝回溯法（Backtracking）**、**A* 啟發式搜尋**以及 **VLSI IC 迷宮繞線（Lee's Algorithm）** 進行精確求解。
+
+---
+
+## 專案目錄結構
+
+建議於 GitHub 儲存庫建立如下之檔案結構：
+
+```text
+.
+├── README.md                 # 專案完整說明與演算法分析文件（本文件）
+├── 01_maze_dfs.py            # 題目 1：老鼠走迷宮問題 (DFS)
+├── 02_river_crossing_bfs.py  # 題目 2：狼羊甘藍菜過河問題 (BFS 最短步數)
+├── 03_eight_queens_dfs.py    # 題目 3：八皇后問題 (DFS 回溯法求解 92 組解)
+├── 04_npc_astar.py           # 題目 4：NPC 搜尋玩家問題 (A* 啟發式搜尋)
+└── 05_ic_routing_lee.py      # 題目 5：IC 設計電路繞線問題 (Lee's Maze Router)
